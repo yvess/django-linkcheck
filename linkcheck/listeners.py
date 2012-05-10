@@ -90,9 +90,9 @@ for linklist_name, linklist_cls in all_linklists.items():
     model_signals.post_delete.connect(listeners[-1], sender=linklist_cls.model)
 
 #2, register listeners for the objects that are targets of Links
-    def instance_pre_save(sender, instance, ModelCls=linklist_cls.model, **kwargs):
-        current_url = instance.get_absolute_url()
+    def instance_pre_save(sender, instance, ModelCls=linklist_cls.model, **kwargs):  
         try:
+            current_url = instance.get_absolute_url()
             previous = ModelCls.objects.get(pk=instance.pk)
             #log.debug('instance exists modifying')
             previous_url = previous.get_absolute_url()
